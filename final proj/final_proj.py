@@ -4,7 +4,7 @@ import tensorflow as tf
 from tensorflow import keras
 
 # Load the data from the CSV file
-data = pd.read_csv('solar_weather.csv')
+data = pd.read_csv('final proj/solar_weather.csv')
 data = data.drop(['Time', 'Energy delta[Wh]', 'sunlightTime', 'dayLength', 'weather_type', 'hour', 'month'], axis=1)
 
 # Split the data into training and testing sets
@@ -44,6 +44,7 @@ new_data2 = pd.DataFrame({'temp': [12.5], 'pressure': [1020], 'humidity': [81], 
 prediction = model.predict(new_data)
 prediction1 = model.predict(new_data1)
 prediction2 = model.predict(new_data2)
-print('Prediction:', prediction)
-print('Prediction:', prediction1)
-print('Prediction:', prediction2)
+print('Prediction:', prediction, 'Actual:', 66.1)
+print('Prediction:', prediction1, 'Actual:', 11.5)
+print('Prediction:', prediction2, 'Actual', 46.4)
+print('Accuracy:', (prediction[0]/66.1 + prediction1[0]/11.5 + prediction2[0]/46.4)/3)
