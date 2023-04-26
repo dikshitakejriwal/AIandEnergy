@@ -16,7 +16,6 @@ train_X = train_data.drop(['GHI'], axis=1)
 train_y = train_data['GHI']
 test_X = test_data.drop(['GHI'], axis=1)
 test_y = test_data['GHI']
-# print(train_y.head(10))
 
 # Define the neural network architecture
 model = keras.Sequential([
@@ -39,12 +38,11 @@ print('Test loss:', test_loss)
 
 # Use the trained model to make predictions on new data
 new_data = pd.DataFrame({'temp': [27.5], 'pressure': [1008], 'humidity': [52], 'wind_speed': [1.8], 'rain_1h': [0.0], 'snow_1h': [0.0], 'clouds_all': [38], 'isSun': [1], 'SunlightTime/daylength': [0.85]}) #66.1
-new_data1 = pd.DataFrame({'temp': [-1.5], 'pressure': [1009], 'humidity': [97], 'wind_speed': [2.0], 'rain_1h': [0.0], 'snow_1h': [0.0], 'clouds_all': [93], 'isSun': [1], 'SunlightTime/daylength': [0.09]}) #11.5
-new_data2 = pd.DataFrame({'temp': [12.5], 'pressure': [1020], 'humidity': [81], 'wind_speed': [0.8], 'rain_1h': [0.0], 'snow_1h': [0.0], 'clouds_all': [100], 'isSun': [1], 'SunlightTime/daylength': [0.79]}) #46.4
 prediction = model.predict(new_data)
-prediction1 = model.predict(new_data1)
-prediction2 = model.predict(new_data2)
-print('Prediction:', prediction, 'Actual:', 66.1)
-print('Prediction:', prediction1, 'Actual:', 11.5)
-print('Prediction:', prediction2, 'Actual', 46.4)
-print('Accuracy:', (prediction[0]/66.1 + prediction1[0]/11.5 + prediction2[0]/46.4)/3)
+# print('Prediction:', prediction, 'Actual:', x)
+surface_area = input("Enter surface area of array(m^2): ")
+time = input("Enter time in hours: ")
+energy = float(prediction) * float(surface_area) * float(time)
+efficiency = input("Enter PV panel efficiency: ")
+power_output = float(energy) * float(efficiency)
+print("Predicted power output over", time, "hours = ", power_output/1000, "kW")
